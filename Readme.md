@@ -26,7 +26,7 @@
       curl -X POST "http://localhost:8080/cardiomind" -H "Content-Type: application/json" --data-binary "@case1.json"
       ```
 
-   2. 返回结果：见`example.json`
+   2. 返回结果：见`output_example.json`
 
 7. 开发过程中请使用Git进行项目管理，并将代码托管在Github，请在模块完成或者版本更新时进行提交，确保最终的commit记录能够清晰地表明项目开发的流程
 

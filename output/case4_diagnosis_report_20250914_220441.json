@@ -1,0 +1,93 @@
+{
+  "session_info": {
+    "session_id": "session_1757858427",
+    "patient_summary": "",
+    "diagnosis_date": "2025-09-14T22:04:41.251867",
+    "total_processing_time": 253.82011699676514
+  },
+  "diagnosis_process": {
+    "initial_hypotheses_count": 5,
+    "revised_diagnoses_count": 3,
+    "quality_concerns_identified": 3,
+    "medical_documents_consulted": 32
+  },
+  "final_diagnosis": {
+    "患者信息": {
+      "年龄": 0,
+      "性别": "未知",
+      "入院日期": "未知"
+    },
+    "临床表现": {
+      "主诉": "需要进一步评估",
+      "现病史": "需要进一步评估"
+    },
+    "病史信息": {
+      "既往史": "不详",
+      "个人史": "不详",
+      "婚育史": "不详",
+      "家族史": "不详"
+    },
+    "体格检查": "需要进一步评估",
+    "辅助检查": "需要进一步评估",
+    "诊断结果": {
+      "主要诊断": {
+        "名称": "解析失败",
+        "诊断依据": [
+          "基于当前信息的初步分析",
+          "由于数据解析问题，建议进一步临床评估"
+        ]
+      },
+      "次要诊断": [],
+      "鉴别诊断": []
+    },
+    "治疗方案": [
+      "建议进一步临床评估和检查"
+    ],
+    "raw_response": "抱歉，Dr.Clinical-Reasoning在生成响应时遇到错误。",
+    "error": "JSON解析失败，返回原始响应",
+    "diagnosis_summary": {
+      "primary_diagnosis_name": "解析失败",
+      "secondary_diagnoses_count": 0,
+      "differential_diagnoses_count": 0,
+      "treatment_categories": 1,
+      "follow_up_plans": 0,
+      "confidence_level": "高"
+    }
+  },
+  "confidence_assessment": {
+    "overall_confidence": "high",
+    "evidence_strength": 0,
+    "consensus_level": "low"
+  },
+  "process_steps": [
+    {
+      "step_name": "hypothesis",
+      "agent_name": "Dr.Hypothesis",
+      "status": "success",
+      "duration": 20.5406494140625,
+      "timestamp": "2025-09-14T22:00:47.972399",
+      "summary": "生成了 5 个候选诊断:\n1. 主动脉瓣反流 (可能性: 高)\n2. 冠状动脉微血管功能障碍 (可能性: 中)\n3. 慢性冠状动脉综合征 (可能性: 中)"
+    },
+    {
+      "step_name": "challenger",
+      "agent_name": "Dr.Challenger",
+      "status": "success",
+      "duration": 48.86151337623596,
+      "timestamp": "2025-09-14T22:01:36.833913",
+      "summary": "审查了 5 个原始诊断，新增 2 个诊断，最终修订为 3 个诊断\n识别出 3 个质量问题\n提供了 3 条建议"
+    },
+    {
+      "step_name": "clinical_reasoning",
+      "agent_name": "Dr.Clinical-Reasoning",
+      "status": "success",
+      "duration": 184.41795420646667,
+      "timestamp": "2025-09-14T22:04:41.251867",
+      "summary": "主要诊断: 解析失败\n置信度: 高\n次要诊断数: 0\n鉴别诊断数: 0\n治疗方案数: 1\n随访计划数: 0"
+    }
+  ],
+  "recommendations": {
+    "immediate_actions": [],
+    "follow_up_required": false,
+    "additional_consultations": []
+  }
+}

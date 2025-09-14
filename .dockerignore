@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-selfcheck.json
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+
+# Test & Build artifacts
+.pytest_cache/
+build/
+dist/
+*.egg-info/
+
+# Local data & logs
+output/
+logs/
+*.log
+*.db
+*.sqlite3
+
+# Large data files that should be mounted, not copied
+corpus/
+rag_vector_db/
+integration_test_db/
+test_rag_db/
+test_vector_storage/

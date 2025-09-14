@@ -1,77 +1,159 @@
-# SAIS AI Engineering Group Warmup Lab 2025
+# SAIS-AIE-WL25 医疗诊断AI系统
 
-## 实验要求
+## 项目简介
 
-开发一个带有RAG的Multi-Agent心内科疾病诊断系统：
+本项目是一个基于多Agent协作和RAG技术的智能医疗诊断系统，专注于心内科疾病的辅助诊断。系统通过三个专业化的医疗Agent协同工作：
 
-1. 系统示例输入见`medical_records`文件夹
+- **Dr.Hypothesis Agent**: 基于患者症状生成初步诊断假设
+- **Dr.Challenger Agent**: 对初步诊断进行质疑和验证
+- **Dr.Clinical-Reasoning Agent**: 综合分析生成最终诊断和治疗建议
 
-2. 系统示例输出见`output_example.json`
+## 如何运行测试用例
 
-3. 搭建一套RAG系统，所使用的语料见`corpus`文件夹
+### 环境准备
 
-4. Multi-Agent需要至少包括三个Agent，至少一个Agent需要与RAG结合，这里给出一个包含三个Agent的Multi-Agent示例（仅作参考，具体实现时可自行设计）：
+1. 安装Python 3.8+
+2. 安装依赖：
+```bash
+pip install -r requirements.txt
+```
 
-   - `Dr.Hypothesis`：根据患者病历信息生成生成诊断假设列表
-   - `Dr.Challenger`：对诊断假设列表进行分析，检查是否存在诊断误差并提出替代诊断
-   - `Dr.Clinical-Reasoning`：综合给出信息完成诊断，生成符合要求格式的主/次要诊断和鉴别诊断
+3. 配置DeepSeek API密钥（在 `app/config/deepseek_config.py` 中）
 
-5. 最终提交的服务必须使用docker进行容器化，请使用dockerfile进行docker镜像的构建
+### 运行单个测试用例
 
-6. 最终实现的系统需要支持`curl`调用：
+```bash
+# 运行特定病例测试
+python tests/test_with_case1.py
+python tests/test_with_case10.py
+```
 
-   1. 示例调用：
+### 批量运行所有测试用例
 
-      ```bash
-      curl -X POST "http://localhost:8080/cardiomind" -H "Content-Type: application/json" --data-binary "@case1.json"
-      ```
+```bash
+# Windows PowerShell
+for ($i=1; $i -le 10; $i++) { python "tests/test_with_case$i.py" }
 
-   2. 返回结果：见`output_example.json`
+# Linux/Mac
+for i in {1..10}; do python tests/test_with_case$i.py; done
+```
 
-7. 开发过程中请使用Git进行项目管理，并将代码托管在Github，请在模块完成或者版本更新时进行提交，确保最终的commit记录能够清晰地表明项目开发的流程
+## 输入病历结构
 
-## LLM使用
+系统接受JSON格式的病历数据，包含以下字段：
 
-- 本次Lab向同学们提供DeepSeek-V3模型，具体调用方式请查询[JuheNet](https://docs.juhenext.com/cn/introduction.html)，调用模型名称为`deepseek-v3-0324`
-- 每位同学拥有约200万tokens的额度
-- LLM调用API KEY会由@miaozeyun发给每位同学
+```json
+{
+  "patient_id": "case10",
+  "age": 29,
+  "gender": "男",
+  "chief_complaint": "间断双下肢水肿、腹胀17年，胸闷、心悸3天",
+  "present_illness": "患者于2002年开始无诱因间断双下肢水肿及腹胀...",
+  "past_history": "10余岁发现乙肝'小三阳'，未诊治...",
+  "personal_history": "生长于湖北新洲；有吸烟史6年...",
+  "family_history": "否认家族遗传性及传染性疾病",
+  "physical_examination": {
+    "vital_signs": "体温36.7℃，脉搏116次/分，呼吸19次/分，血压121/103mmHg",
+    "general_condition": "神志清楚；口唇无发绀，颈静脉怒张...",
+    "cardiovascular": "心界不大，心率127次/分，心律绝对不齐...",
+    "respiratory": "双下肺叩诊实音，双上肺呼吸音清...",
+    "abdomen": "腹膨隆，腹壁静脉显露...",
+    "extremities": "双下肢凹陷性水肿，双下肢色素沉着"
+  },
+  "laboratory_tests": {
+    "blood_routine": "白细胞9.98×10^9/L，中性粒细胞0.7665...",
+    "liver_function": "谷丙转氨酶86.7U/L，谷草转氨酶109.6U/L...",
+    "kidney_function": "肌酐78μmol/L，尿酸571μmol/L",
+    "cardiac_markers": "NT-proBNP 1987ng/L",
+    "coagulation": "PT 21.2秒，INR 1.84",
+    "other_tests": "D-二聚体19.20mg/L"
+  },
+  "imaging_studies": {
+    "ecg": "心房颤动伴快速心室率，导联低电压",
+    "chest_xray": "心影增大，双侧肋膈角消失，提示胸腔积液",
+    "echocardiography": "双心房扩大（LA 5.1cm，RA 5.3cm），左心室收缩功能稍减低（LVEF 45%）",
+    "abdominal_ultrasound": "淤血性肝肿大，胆囊壁增厚，脾稍厚，腹腔大量积液"
+  }
+}
+```
 
-## 提交内容
+## 输出诊断报告内容（Case10示例）
 
-请在Lab仓库中创建独立的`final`分支进行提交，具体需要提交的内容包括：
+系统生成的诊断报告包含以下结构：
 
-1. `Readme.md`文件：说明如何使用`姓名-Cardiomind-Agent.tar`文件在任何一台安装了docker的机器上将服务启动并进行测试，其中`姓名-Cardiomind-Agent.tar`文件是由docker镜像保存得到的`.tar`格式的归档包
-2. `Presentation.ppt/pptx`文件：说明该系统的具体实现细节，需要贴出在项目的开发过程中阅读的论文，文档，博客等材料
+### 患者基本信息
+```json
+"患者信息": {
+  "年龄": 29,
+  "性别": "男",
+  "入院日期": "2019-01-11"
+}
+```
 
-请在Lab截止时间前将`姓名-Cardiomind-Agent.tar`文件发送到邮箱`zymiao24@m.fudan.edu.cn`（姓名使用拼音全拼即可）
+### 临床表现
+```json
+"临床表现": {
+  "主诉": "间断双下肢水肿、腹胀17年，胸闷、心悸3天",
+  "现病史": "患者于2002年开始无诱因间断双下肢水肿及腹胀..."
+}
+```
 
-## 截止时间
+### 诊断结果
+```json
+"诊断结果": {
+  "主要诊断": {
+    "名称": "慢性心力衰竭（全心衰竭）",
+    "诊断依据": [
+      "长期双下肢水肿、腹胀病史，利尿治疗有效",
+      "近期出现胸闷、心悸、无尿等心衰加重表现",
+      "体格检查示颈静脉怒张、肝颈静脉回流征阳性、双下肢水肿、腹水",
+      "NT-proBNP升高（1987ng/L）",
+      "超声心动图示双心房扩大、左室收缩功能减低"
+    ]
+  },
+  "次要诊断": [
+    {
+      "名称": "快室率心房颤动",
+      "诊断依据": ["突发心悸症状", "心电图证实房颤伴快速心室率"]
+    },
+    {
+      "名称": "淤血性肝病",
+      "诊断依据": ["长期右心衰竭表现", "肝功能异常", "超声示淤血性肝肿大"]
+    }
+  ],
+  "鉴别诊断": ["缩窄性心包炎", "限制型心肌病", "肝硬化失代偿期", "肺栓塞"]
+}
+```
 
-**2025年9月14日24:00**
+### 治疗方案
+```json
+"治疗方案": [
+  "心衰治疗：利尿剂（呋塞米+螺内酯）减轻容量负荷",
+  "房颤管理：控制心室率，评估抗凝指征",
+  "容量管理：严格限制钠盐摄入，监测每日出入量及体重",
+  "肝脏保护：保肝治疗，监测肝功能",
+  "病因筛查：完善甲状腺功能、铁代谢等检查",
+  "长期管理：心衰健康教育，戒烟限酒，定期随访"
+]
+```
 
-在截止时间后的git commit不会被视为有效的commit，距离截止时间最近的一次commit会被视为你本次Lab的最终提交，同样的距离截止时间最近的一次发送到邮箱`zymiao24@m.fudan.edu.cn`中的`姓名-Cardiomind-Agent.tar`文件会被用于Lab Pre时的现场演示。
+### 诊断过程信息
+```json
+"diagnosis_process": {
+  "initial_hypotheses_count": 5,
+  "revised_diagnoses_count": 4,
+  "quality_concerns_identified": 3,
+  "medical_documents_consulted": 32
+}
+```
 
-## 提问
+## 输出文件
 
-- 每位同学有三次向@miaozeyun提问的机会，任何和项目有关的问题，包括某些环节可以采用什么样的技术、具体的代码如何实现、出现了这样的Bug应该如何解决等
-- Lab本意是希望同学们了解AI工程组某个现有项目的主要流程及Agent应用开发的各个环节，对于同学们的实现效果并没有要求，所以还是希望同学们能够独自完成技术选型、代码开发及调试、部署及测试等工作，不要将希望寄托于提问
-- 如果实在遇到了无法解决的问题，或是Lab的开发因为某个问题已经停滞了超过24h，请使用提问机会以避免在ddl前无法完成该Lab
-- 提问前请阅读[How-To-Ask-Questions-The-Smart-Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)，不要浪费宝贵的提问机会
+诊断报告将保存在 `output/` 目录下，文件名格式为：
+`case{编号}_diagnosis_report_{时间戳}.json`
 
-## 注意
+例如：`output/case10_diagnosis_report_20250914_222017.json`
 
-1. 独立完成该Lab，不要与其他同学沟通任何与系统实现相关的问题
-2. 使用Python作为开发语言，具体语言规范可参考[Python语言规范 — Google 开源项目风格指南](https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_language_rules.html)
-3. 本次Lab不对最终的诊断效果进行任何要求，同学们专注于系统流程的实现即可
-4. Lab Pre的时间控制在25-30min之间，实际Pre时会计时，请同学们把握好Pre的时间
-5. DeepSeek-V3模型并不是多模态模型，所以本次Lab实现不必考虑语料中的图片
-6. 可以使用搜索引擎及任何可以使用的AI工具（包括但不限于GPT、Claude、Grok、Gemini、Kimi等网页AI助手；Cursor、Github Copilot、Claude Code、Gemini CLI等AI编程工具），但请保留使用AI的历史记录，Lab Pre时会进行检查和提问
-7. 使用AI编程工具请对AI实现的代码进行充分理解，明白AI为什么会这样进行实现，Lab Pre时会进行检查和提问
-8. Lab Pre时除了需要根据`Presentation.ppt/pptx`文件对所实现的系统进行说明外，还需要现场按照`Readme.md`文件将服务启动并进行测试，测试机器会在开学后提供，可供同学们进行部署测试，同时请确保现场演示时服务的可用性
-9. 如果在使用docker镜像启动服务时有文件挂载的需求，请在一并将文件打包成的`.zip`压缩包发送到邮箱`zymiao24@m.fudan.edu.cn`；如果docker镜像需要使用GPU，请在发送`.tar`文件时一并告知
-10. 受限于CFFF平台账号问题，本次Lab同学们无法使用SAIS计算资源，如果本地计算资源有限或存在环境配置等问题，可使用部署在星河启智平台的`gme-qwen2-vl-7b`Embedding模型，具体使用方法请参考`gme-qwen2-vl-7b使用文档.md`
+## 注意事项
 
-### Tips
-
-- AI Coding工具的出现极大的加速了此类demo级项目的开发，请同学们大胆使用AI Coding工具，并在Lab开发过程中学习如何使用AI加速选型、开发、测试、部署等各个环节
-- 祝同学们好运
+⚠️ **免责声明**: 本系统仅用于医疗辅助诊断和学术研究目的，不能替代专业医生的临床判断。任何医疗决策都应该基于专业医生的建议和临床经验。

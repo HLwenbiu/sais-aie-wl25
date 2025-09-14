@@ -1,0 +1,118 @@
+{
+  "session_info": {
+    "session_id": "session_1757834991",
+    "patient_summary": "",
+    "diagnosis_date": "2025-09-14T15:31:56.441335",
+    "total_processing_time": 125.17984962463379
+  },
+  "diagnosis_process": {
+    "initial_hypotheses_count": 5,
+    "revised_diagnoses_count": 4,
+    "quality_concerns_identified": 2,
+    "medical_documents_consulted": 32
+  },
+  "final_diagnosis": {
+    "患者信息": {
+      "年龄": 0,
+      "性别": "",
+      "入院日期": ""
+    },
+    "临床表现": {
+      "主诉": "",
+      "现病史": ""
+    },
+    "病史信息": {
+      "既往史": "",
+      "个人史": "",
+      "婚育史": "",
+      "家族史": ""
+    },
+    "体格检查": "",
+    "辅助检查": "",
+    "诊断结果": {
+      "主要诊断": {
+        "名称": "主动脉瓣反流",
+        "诊断依据": [
+          "参考文献1和2提供了关于主动脉瓣反流的详细专家共识，支持该诊断的可能性较高。"
+        ]
+      },
+      "次要诊断": [
+        {
+          "名称": "冠状动脉微血管功能障碍",
+          "诊断依据": [
+            "参考文献4和5提到了冠状动脉微血管功能障碍的诊断和管理，支持该诊断的可能性中等。"
+          ]
+        },
+        {
+          "名称": "慢性冠状动脉综合征",
+          "诊断依据": [
+            "参考文献4和5提到了慢性冠状动脉综合征的诊断和管理，支持该诊断的可能性中等。"
+          ]
+        },
+        {
+          "名称": "主动脉瓣狭窄",
+          "诊断依据": [
+            "参考文献1和2中提到经导管主动脉瓣置换术最初用于治疗主动脉瓣狭窄",
+            "考虑到主动脉瓣反流和狭窄常并存"
+          ]
+        }
+      ],
+      "鉴别诊断": [
+        "冠状动脉痉挛",
+        "结构性心脏病"
+      ]
+    },
+    "治疗方案": [
+      "建议补充患者的主诉、现病史、既往史、体格检查和生命体征信息，以便更准确地进行诊断",
+      "建议优先考虑高概率的诊断（如主动脉瓣反流），并进行相应的检查以确认",
+      "建议在诊断过程中考虑常见的并存疾病（如主动脉瓣狭窄）",
+      "进行超声心动图、心脏MRI、经食道超声心动图等检查以确认主动脉瓣反流和狭窄",
+      "进行冠状动脉功能测试、心肌灌注成像、心脏MRI等检查以评估冠状动脉微血管功能障碍",
+      "进行冠状动脉CT血管造影、运动负荷试验、心肌灌注扫描等检查以评估慢性冠状动脉综合征"
+    ],
+    "diagnosis_summary": {
+      "primary_diagnosis_name": "主动脉瓣反流",
+      "secondary_diagnoses_count": 3,
+      "differential_diagnoses_count": 2,
+      "treatment_categories": 6,
+      "follow_up_plans": 0,
+      "confidence_level": "高"
+    }
+  },
+  "confidence_assessment": {
+    "overall_confidence": "high",
+    "evidence_strength": 0,
+    "consensus_level": "medium"
+  },
+  "process_steps": [
+    {
+      "step_name": "hypothesis",
+      "agent_name": "Dr.Hypothesis",
+      "status": "success",
+      "duration": 24.615775108337402,
+      "timestamp": "2025-09-14T15:30:15.876262",
+      "summary": "生成了 5 个候选诊断:\n1. 主动脉瓣反流 (可能性: 高)\n2. 冠状动脉微血管功能障碍 (可能性: 中)\n3. 慢性冠状动脉综合征 (可能性: 中)"
+    },
+    {
+      "step_name": "challenger",
+      "agent_name": "Dr.Challenger",
+      "status": "success",
+      "duration": 62.112133264541626,
+      "timestamp": "2025-09-14T15:31:17.988395",
+      "summary": "审查了 5 个原始诊断，新增 1 个诊断，最终修订为 4 个诊断\n识别出 2 个质量问题\n提供了 3 条建议"
+    },
+    {
+      "step_name": "clinical_reasoning",
+      "agent_name": "Dr.Clinical-Reasoning",
+      "status": "success",
+      "duration": 38.45194125175476,
+      "timestamp": "2025-09-14T15:31:56.441335",
+      "summary": "主要诊断: 主动脉瓣反流\n置信度: 高\n次要诊断数: 3\n鉴别诊断数: 2\n治疗方案数: 6\n随访计划数: 0"
+    }
+  ],
+  "recommendations": {
+    "immediate_actions": [],
+    "follow_up_required": false,
+    "additional_consultations": []
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "processing_time": "2025-09-12 01:54:48",
+  "total_chunks": 204,
+  "successful_embeddings": 204,
+  "success_rate": 100.0,
+  "vector_dimension": 3584,
+  "source_statistics": {
+    "1-s2.0-S0140673623004592-main.pdf": {
+      "total": 98,
+      "successful": 98
+    },
+    "1-s2.0-S0735109721051731-main.pdf": {
+      "total": 106,
+      "successful": 106
+    }
+  },
+  "pipeline_config": {
+    "storage_dir": "test_rag_db",
+    "embedding_api": "https://gme-qwen2-vl-7b.ai4s.com.cn/embed/text"
+  }
+}

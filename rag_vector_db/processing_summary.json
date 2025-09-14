@@ -1,0 +1,53 @@
+{
+  "processing_time": "2025-09-12 01:59:24",
+  "total_chunks": 582,
+  "successful_embeddings": 582,
+  "success_rate": 100.0,
+  "vector_dimension": 3584,
+  "source_statistics": {
+    "1-s2.0-S0140673623004592-main.pdf": {
+      "total": 98,
+      "successful": 98
+    },
+    "1-s2.0-S0735109721051731-main.pdf": {
+      "total": 106,
+      "successful": 106
+    },
+    "1-s2.0-S0735109722070267-main.pdf": {
+      "total": 86,
+      "successful": 86
+    },
+    "1-s2.0-S0735109722075362-main.pdf": {
+      "total": 53,
+      "successful": 53
+    },
+    "1-s2.0-S193687982100501X-main.pdf": {
+      "total": 80,
+      "successful": 80
+    },
+    "1.中国经导管主动脉瓣置换术临...路径专家共识（2024版）_中国医师协会心血管内科医师分会结构性心脏病学组_.pdf": {
+      "total": 42,
+      "successful": 42
+    },
+    "1_2023+左心室辅助装置植入患者运动训练的理论与实践进展.pdf": {
+      "total": 10,
+      "successful": 10
+    },
+    "1_2_冠状动脉旁路移植术后心脏康复专家共识.pdf": {
+      "total": 50,
+      "successful": 50
+    },
+    "2.单纯主动脉瓣反流经股动脉主...瓣置换中国专家共识2023 (1).pdf": {
+      "total": 30,
+      "successful": 30
+    },
+    "4.经导管主动脉瓣置换术中国专家共识（2020更新版）_周达新 (5).pdf": {
+      "total": 27,
+      "successful": 27
+    }
+  },
+  "pipeline_config": {
+    "storage_dir": "rag_vector_db",
+    "embedding_api": "https://gme-qwen2-vl-7b.ai4s.com.cn/embed/text"
+  }
+}

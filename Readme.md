@@ -1,4 +1,4 @@
-# SAIS-AIE-WL25 医疗诊断AI系统
+# 医疗诊断AI系统
 
 ## 项目简介
 
@@ -154,6 +154,3 @@ for i in {1..10}; do python tests/test_with_case$i.py; done
 
 例如：`output/case10_diagnosis_report_20250914_222017.json`
 
-## 注意事项
-
-⚠️ **免责声明**: 本系统仅用于医疗辅助诊断和学术研究目的，不能替代专业医生的临床判断。任何医疗决策都应该基于专业医生的建议和临床经验。
